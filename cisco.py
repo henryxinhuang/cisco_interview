@@ -1,5 +1,6 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
+import signal
 
 urls_lookuptable = {
     "theteflacademy.co.uk": "This URL is known to contain malware.",
@@ -39,8 +40,16 @@ class MaliciousURLLookup(BaseHTTPRequestHandler):
 
 def run(server_class=HTTPServer, handler_class=MaliciousURLLookup):
     print('Starting application...')
-    server_address = ('', 8080) # Make sure your por 8080 is available
+    server_address = ('', 8080) # Make sure your por 8080 is available, http://localhost:8080/v1/urlinfo/
     httpd = server_class(server_address, handler_class)
+
+    # Handle Ctrl+C interrupt signal  
+    def signal_handler(sig, frame):
+        print('Shutting down server...')
+        httpd.server_close()
+        sys.exit(0)
+    
+    signal.signal(signal.SIGINT, signal_handler)
     
     print('Application is running...')
     httpd.serve_forever()
