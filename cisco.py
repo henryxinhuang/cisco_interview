@@ -1,6 +1,7 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 import signal
+import sys
 
 urls_lookuptable = {
     "theteflacademy.co.uk": "This URL is known to contain malware.",
