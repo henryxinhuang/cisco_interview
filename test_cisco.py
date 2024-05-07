@@ -34,7 +34,7 @@ class TestMaliciousURLLookup(unittest.TestCase):
             self.assertEqual(data['message'], 'This URL is known to contain malware.')
 
     def test_unknown_url(self):
-        with urlopen('http://localhost:8080/v1/urlinfo/unknownurl.com') as response:
+        with urlopen('http://localhost:8080/v1/urlinfo/google.com') as response:
             data = json.loads(response.read().decode('utf-8'))
             self.assertTrue(data['safe'])
             self.assertEqual(data['message'], 'The URL entered is not in the blacklist')

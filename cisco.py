@@ -2,14 +2,35 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 import signal
 import sys
+import time
 
 url_blacklist = {
     "theteflacademy.co.uk": "This URL is known to contain malware.",
     "ali213.net": "This URL might contain adware."
 }
 
+# Throttling parameters, 5 requests max per second, token resets every second
+MAX_REQUESTS_PER_SECOND = 5
+TOKEN_REFRESH_INTERVAL = 1.0 / MAX_REQUESTS_PER_SECOND
+tokens = MAX_REQUESTS_PER_SECOND
+last_refresh_time = time.time()
+
 class MaliciousURLLookup(BaseHTTPRequestHandler):
     def do_GET(self):
+        global tokens, last_refresh_time
+        
+        # Throttle requests
+        current_time = time.time()
+        elapsed_time = current_time - last_refresh_time
+        tokens = min(tokens + elapsed_time * MAX_REQUESTS_PER_SECOND, MAX_REQUESTS_PER_SECOND)
+        last_refresh_time = current_time
+        
+        if tokens < 1:
+            self.send_error(429, 'Too Many Requests per second !')
+            self.end_headers()
+            return
+        
+        tokens -= 1 
         
         if self.path.startswith('/v1/urlinfo/'):
             # Extract the URL from the request path by stripping

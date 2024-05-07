@@ -1,4 +1,4 @@
-# Malware URL Lookup Exercise
+# Malware URL Lookup Exercise for Arun
 
 This simple Python application checks that responds to GET requests where the
 caller passes in a URL and the service responds with some information about that URL.
@@ -63,7 +63,7 @@ memory capacity of the system?
 The number of requests may exceed the capacity of this system, how might you solve
 that?
 
-*My answer: I implemented throttling. High availability like K8s would also be useful*
+*My answer: I implemented throttling. 5 requests max per second, token resets every second. High availability like K8s would also be useful*
 
 What are some strategies you might use to update the service with new URLs? Updates
 may be as many as 5000 URLs a day with updates arriving every 10 minutes
