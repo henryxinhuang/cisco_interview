@@ -30,10 +30,10 @@ If the URL is in the blacklist, the response:
 }
 ```
 
-If the URL is in the blacklist, the response:
+If the URL is not in the blacklist, the response:
 ```bash
 {
-  "url": "malicious.com",
+  "url": "google.com",
   "safe": true,
   "message": "The URL entered is not in the blacklist"
 }
