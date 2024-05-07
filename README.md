@@ -5,9 +5,9 @@ caller passes in a URL and the service responds with some information about that
 
 ## Prerequisite
 
-Python 3
-A Browser
-Available HTTP port
+Python 3\n
+A Browser\n
+Available HTTP port\n
 
 ## How to Use
 
@@ -21,7 +21,7 @@ Application is running...
 ```
 Go to your browser and test http://localhost:8080/v1/urlinfo/[url in question]
 
-If the URL is in the blacklist:
+If the URL is in the blacklist, the response:
 ```bash
 {
   "url": "theteflacademy.co.uk",
@@ -30,7 +30,7 @@ If the URL is in the blacklist:
 }
 ```
 
-If the URL is in the blacklist:
+If the URL is in the blacklist, the response:
 ```bash
 {
   "url": "malicious.com",
@@ -39,6 +39,6 @@ If the URL is in the blacklist:
 }
 ```
 
-## How to Use
+## How to Exit
 
 Press Ctrl + C
