@@ -3,9 +3,9 @@ import json
 import signal
 import sys
 
-urls_lookuptable = {
+url_blacklist = {
     "theteflacademy.co.uk": "This URL is known to contain malware.",
-    "google.com": "This URL is safe to access."
+    "ali213.net": "This URL might contain adware."
 }
 
 class MaliciousURLLookup(BaseHTTPRequestHandler):
@@ -17,16 +17,16 @@ class MaliciousURLLookup(BaseHTTPRequestHandler):
             url = url.strip('/')
 
             # Check if the URL is known to contain malware
-            if url in urls_lookuptable:
+            if url in url_blacklist:
                 
                 # If found, return a response indicating that the URL is not safe
                 response = {
                     "url": url,
                     "safe": False,
-                    "message": urls_lookuptable[url]
+                    "message": url_blacklist[url]
                 }
             else:
-                # If not found, return a response indicating that the URL is safe
+                # If not found, return a response indicating that the URL not in the blacklist and is safe
                 response = {
                     "url": url,
                     "safe": True,
