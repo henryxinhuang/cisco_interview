@@ -31,3 +31,9 @@ steps:
     pip install pytest pytest-azurepipelines
     pytest
   displayName: 'pytest'
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'acr'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
